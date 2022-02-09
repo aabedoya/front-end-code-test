@@ -293,7 +293,16 @@
     }
   }
 </style>
-
 <h1>{{title}}</h1>
+<div class="contenedor">
+  
+  <div [@triggerBackgroundChange] ='color' class="circle" (clic) ='changeColor()'>
+    Haz click en mi
+  </div>
+  <h1>
+    {{title}}!
+  </h1>
+</div>
+
 
 <router-outlet></router-outlet>
