@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 h1 {
     color: rgb(0, 255, 34);
     font-family: lobster, monospace;
