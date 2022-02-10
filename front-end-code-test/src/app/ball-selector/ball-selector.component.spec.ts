@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BallSelectorComponent } from './ball-selector.component';
+import { BallSelectorComponent } from "./ball-selector.component";
 
 describe('BallSelectorComponent', () => {
   let component: BallSelectorComponent;

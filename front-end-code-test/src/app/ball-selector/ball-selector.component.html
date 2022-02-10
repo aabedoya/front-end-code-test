@@ -1,13 +1,4 @@
-<div class="containerBalls">
-    <button type="button" class="ball1">1</button>
-    <button type="button" class="ball2">2</button>
-    <button type="button" class="ball3">3</button>
-    <button type="button" class="ball4">4</button>
-    <button type="button" class="ball5">5</button>
-    <button type="button" class="ball6">6</button>
-    <button type="button" class="ball7">7</button>
-    <button type="button" class="ball8">8</button>
-    <button type="button" class="ball9">9</button>
-    <button type="button" class="ball10">10</button>
+<div class="container-balls flex flex-row justify-center items-center">
+    <button type="button" class="container-balls__ball container-balls__ball__{{item}}" *ngFor="let item of balls">{{item}}</button>
 </div>
 
