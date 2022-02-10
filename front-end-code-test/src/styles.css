@@ -1,13 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-h1 {
-    color: rgb(0, 255, 34);
-    font-family: lobster, monospace;
-    text-align: center;
-    text-shadow: -3px 3px #558ABB;
-    font-size: 120px;
-}
+
+
 
 
 
