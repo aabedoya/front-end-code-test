@@ -3,6 +3,11 @@
     width: 300px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 5px;
+    display: grid;
+    grid-template-columns: 0.2fr 0.8fr;
+    height: 100vh;
+    /* Puedes limitar la anchura */
+    max-width: 1500px;
 }
 
 h1 {
