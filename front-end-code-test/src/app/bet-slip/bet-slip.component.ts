@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'bet-slip',
@@ -10,7 +11,7 @@ public valueBet: number = 0;
 public amountBet: number = 10000;
 
   constructor() { }
-
+  
   ngOnInit(): void {
   }
 
