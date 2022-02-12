@@ -1,1 +1,4 @@
-<button on:click={showAlert}>Alert</button>
+<div class="form-group">
+    <input type="text" class="form-control" currencyMask  placeholder="Enter the value to bet" formControlName="value" (blur)="validationValue()">
+    <button type="submit" class="btn btn-dark" (click)="GenerateBet()" [disabled]="!disableBet"> To Bet</button>
+</div>
