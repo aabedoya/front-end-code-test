@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { NgModule } from '@angular/core';
+import { fromEvent} from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'bet-slip',
@@ -12,21 +15,39 @@ export class BetSlipComponent implements OnInit {
   public boardForm: any;
   public disableBet: any;
   public AvailableMoney: any;
-  public selectedNumber: number[] = [];
+  public numero: number = 0;
+  public selectedNumber: any[] = [];
   public viewCard = false;
   public stakeValue: any;
   public totalWon: any;
   public NumberWon: any;
-
+  public ballsSelected: any[] = [1,2,3,4];
+  public totalBallSelected: number = 0;
+  public amount: number = 0;
+  public total: number = 0;
+  public monto: number=0;
+  
   constructor() { }
-
+  
   ngOnInit(): void {
+     this.totalBallSelected = this.ballsSelected.length;
+    // const observable1 = fromEvent(button.addEventListener, 'click').subscribe(() =>
+    //   console.log('You clicked the page!')
+    // );
+  }
+
+  multiplicarapuesta(){
+    
+    /* console.log('Valor del input',document.getElementById('input-text'));
+    this.amount = Number(document.getElementById('input-text'));
+    console.log(this.amount);
+    this.total = this.totalBallSelected * this.amount; */
   }
 
   validationValue(): any {
     if (+this.boardForm.get('value').value < 5) {
       this.disableBet = false;
-      Swal.fire('Apuesta mínima 5 Euros')
+      Swal.fire('Apuesta mínima 5 Euros');
       this.boardForm.reset();
     } else if (+this.boardForm.get('value').value >= this.AvailableMoney ) {
       this.disableBet = false;
@@ -39,7 +60,7 @@ export class BetSlipComponent implements OnInit {
   GenerateBet(): any {
     if (this.selectedNumber.length <= 0) {
       Swal.fire('Seleccione al menos 1 balota');
-    } 
+    }
     else {
       this.viewCard = true;
       this.stakeValue = this.boardForm.get('value').value;

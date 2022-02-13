@@ -1,13 +1,25 @@
+.container-left{
+    border-radius: 5px;
+    padding-top: 100px;
+    padding-bottom: 200px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 .container-balls{
-    margin: 10px;
+    background-color: white;
+    border: 1px dashed red;
+    height: 120px;
+    border: 1px dashed transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
     &__ball {
         color: white;
         border-radius: 50%;
-        height: 50px;
-        width: 50px;
-        margin: 10px;
+        height: 60px;
+        width: 60px;
+        text-shadow: -1px 1px #3d3a3a;
         &__1 {
-            background-color: #07b82e;
+            background-color: #fbff00;
         }
         &__2 {
             background-color: #8f361b;
@@ -38,11 +50,14 @@
         }
     }
     &__ball:hover {
-        color: white;
         border-radius: 50%;
         height: 80px;
         width: 80px;
-        margin: 10px;
-        filter:brightness(200%);
+        font-size: 150%;
     }
+}
+.button-light{
+    border: white;
+    background-color: white;
+    color: rgb(74, 179, 214);
 }

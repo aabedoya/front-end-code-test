@@ -1,0 +1,60 @@
+.calculate-amount{
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    padding-top: 100px;
+}
+.contenedor{
+
+    background-color: white;
+    border: 1px dashed transparent;
+    margin-left: 10px;
+    height: 50%;
+    border-radius: 5px;
+    padding: 5px;
+}
+.container-balls-selected{
+        background-color: white;
+        border: 1px dashed red;
+        height: 100%;
+        padding-top: 100px;
+        border: 1px dashed blue;
+        border-radius: 5px;
+        &__ball {
+            color: white;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            text-shadow: -1px 1px #3d3a3a;
+            &__1 {
+                background-color: #fbff00;
+            }
+            &__2 {
+                background-color: #8f361b;
+            }
+            &__3 {
+                background-color: #209ec5;
+            }
+            &__4 {
+                background-color: #000000;
+            }
+            &__5 {
+                background-color: #bb9107;
+            }
+            &__6 {
+                background-color: #0f1fa7;
+            }
+            &__7 {
+                background-color: #aa2424;
+            }
+            &__8 {
+                background-color: #2cb127;
+            }
+            &__9 {
+                background-color: #c142b6;
+            }
+            &__10 {
+                background-color: #a3cf3c;
+            }
+        }
+}

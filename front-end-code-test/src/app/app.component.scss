@@ -1,21 +1,30 @@
-
+.contenedor{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: 70vh;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px dashed transparent;
+}
 
 h1 {
-    color: rgb(0, 153, 255);
+    color: deepskyblue;
     font-family: Lobster;
     text-align: center;
-    text-shadow: -3px 3px #3d3a3a;;
+    text-shadow: -3px 3px #3d3a3a;
     font-size: 100px;
+    padding: 20px;
 }
 h2 {
-    color: rgb(0, 153, 255);
+    color: rgb(255, 0, 149);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
     text-shadow: -2px 2px #3d3a3a;
     font-size: 60px;
 }
 h3 {
-    color: rgb(0, 153, 255);
+    color: deepskyblue;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
     text-shadow: -1px 1px #3d3a3a;

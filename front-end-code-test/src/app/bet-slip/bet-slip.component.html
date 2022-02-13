@@ -1,4 +1,22 @@
-<div class="form-group">
-    <input type="text" class="form-control" currencyMask  placeholder="Enter the value to bet" formControlName="value" (blur)="validationValue()">
-    <button type="submit" class="btn btn-dark" (click)="GenerateBet()" [disabled]="!disableBet"> To Bet</button>
+
+
+<div class="contenedor">
+    <div>
+        <button type="button" class="container-balls-selected__ball container-balls-selected__ball__{{ballSelected}} mb-5" *ngFor="let ballSelected of ballsSelected">{{ballSelected}} </button>
+    </div>
+    <div class="calculate-amount">
+        <label class="border-primary me-3">{{totalBallSelected}}</label>
+        <input type="text" [(ngModel)]="monto">
+        <button id="button" type="submit" class="btn btn-primary ms-3" (click)="multiplicarapuesta()">
+        
+            Ok</button>
+    </div>
+</div>
+
+<div class="d-flex justify-content-around aling-item-center">
+    <label>Total: {{monto*totalBallSelected}}</label>
+</div>
+
+<div class="d-grid gap-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block ms-2 mt-2">Place Bet</button>
 </div>

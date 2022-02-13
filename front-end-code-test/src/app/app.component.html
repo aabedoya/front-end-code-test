@@ -1,19 +1,10 @@
 <h1>{{title}}</h1>
-
-<div class="container">
-  <div class="row">
-    <div class="col-8">
-      <div class="container-balls">
-        <ball-selector></ball-selector>
-      </div>
-    </div>
-      
-    <div class="col-4">
-      <bet-slip></bet-slip>
-    </div>
+<div class="contenedor">
+  <div class="left">
+    <ball-selector></ball-selector>
+  </div>
+  <div class="right">
+    <bet-slip></bet-slip>
   </div>
 </div>
 
-<h3 class="rel-center">{{name}}</h3>
-
-<router-outlet></router-outlet>

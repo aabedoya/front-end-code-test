@@ -1,6 +1,17 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-
-*body{
-    margin: 0%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    height: 100vh;
+}
+html {
 }
 
+body {
+    min-height: 100vh;
+    border: 1px dashed transparent;
+    background-color: lightgray;
+}
