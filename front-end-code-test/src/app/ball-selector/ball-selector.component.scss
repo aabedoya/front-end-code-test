@@ -1,0 +1,63 @@
+.container-left{
+    border-radius: 5px;
+    padding-top: 100px;
+    padding-bottom: 200px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.container-balls{
+    background-color: white;
+    border: 1px dashed red;
+    height: 120px;
+    border: 1px dashed transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    &__ball {
+        color: white;
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        text-shadow: -1px 1px #3d3a3a;
+        &__1 {
+            background-color: #fbff00;
+        }
+        &__2 {
+            background-color: #8f361b;
+        }
+        &__3 {
+            background-color: #209ec5;
+        }
+        &__4 {
+            background-color: #000000;
+        }
+        &__5 {
+            background-color: #bb9107;
+        }
+        &__6 {
+            background-color: #0f1fa7;
+        }
+        &__7 {
+            background-color: #aa2424;
+        }
+        &__8 {
+            background-color: #2cb127;
+        }
+        &__9 {
+            background-color: #c142b6;
+        }
+        &__10 {
+            background-color: #a3cf3c;
+        }
+    }
+    &__ball:hover {
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        font-size: 150%;
+    }
+}
+.button-light{
+    border: white;
+    background-color: white;
+    color: rgb(74, 179, 214);
+}

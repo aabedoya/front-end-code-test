@@ -1,13 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-h1 {
-    color: rgb(0, 255, 34);
-    font-family: lobster, monospace;
-    text-align: center;
-    text-shadow: -3px 3px #558ABB;
-    font-size: 120px;
+@import "~bootstrap/dist/css/bootstrap.css";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    height: 100vh;
+}
+html {
 }
 
-
-
+body {
+    min-height: 100vh;
+    border: 1px dashed transparent;
+    background-color: lightgray;
+}
