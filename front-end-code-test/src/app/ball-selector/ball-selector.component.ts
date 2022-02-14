@@ -22,12 +22,12 @@ export class BallSelectorComponent implements OnInit {
   }
   bolaCliqueada(b:number){
     this.ballsClicked.push(b);
-    console.log(b);
+    console.log('parametro',b);
     this.dataService.addBall(this.ballsClicked.values)
     console.log(this.ballsClicked)
   }
 
-  clearSelection(){
+  clearSelection(): void{
     this.ballsClicked.length=0;
     this.dataService.clear();
   }

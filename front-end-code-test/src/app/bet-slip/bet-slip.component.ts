@@ -30,10 +30,10 @@ export class BetSlipComponent implements OnInit {
   public amount: number = 0;
   public total: number = 0;
   public monto: number=0;
-  
+  public subTotal: number=0;
+
   ballsSelected!: number[];
   lugar!: { valor: any; };
-  
 
   constructor(private dataService: DataService) {
   }
@@ -57,13 +57,7 @@ validationBoard(): any {
     value: new FormControl('', [Validators.required])
   });
 }
-  
-  multiplicarapuesta(){
-    /* console.log('Valor del input',document.getElementById('input-text'));
-    this.amount = Number(document.getElementById('input-text'));
-    console.log(this.amount);
-    this.total = this.totalBallSelected * this.amount; */
-  }
+
   onClickSubmit(data: { valor: number; }){
     if(data.valor<5){
       Swal.fire('Apuesta mínima 5 Euros');
@@ -72,6 +66,21 @@ validationBoard(): any {
     }else{
       this.total=data.valor*this.totalBallSelected
       Swal.fire('Total apostar',String(this.total));
+    }
+  }
+
+  onClickPlaceBet(){
+    if(this.totalBallSelected<1){
+      Swal.fire('Selecciona al menos una balota');
+    }else if(this.total<5){
+      Swal.fire('Apuesta mínima 5 Euros');
+    }else{
+      this.AvailableCredit-=this.total
+      const numberWin=this.getRandomNumber();
+      this.dataService.clear()
+      this.total=0;
+      this.ballsSelected.length=0;
+      Swal.fire('Numero ganador es el: ',String(numberWin));
     }
   }
 
@@ -90,48 +99,13 @@ validationBoard(): any {
   //   }
   // }
 
-  GenerateBet(): any {
-    if (this.selectedNumber.length <= 0) {
-      Swal.fire('Seleccione al menos 1 balota');
-    }
-    else {
-      this.viewCard = true;
-      this.stakeValue = this.boardForm.get('value').value;
-      this.totalWon = (this.stakeValue * 1.5) / 100;
-      var ramdon = this.getRandomArbitrary();
-      console.log(ramdon);
-      this.NumberWon = ramdon;
-
-        Swal.fire({
-        title: 'Generating result',
-        html: '¡The winning number is <b></b> !',
-        timerProgressBar: true,
-        showDenyButton: false,
-        confirmButtonText: 'Ok',
-            didOpen: () => {
-                Swal.showLoading();
-                setInterval(() => {
-                    this.ViewResult(this.NumberWon)
-                  }, 3000)
-            },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.SaveHistory();
-          }
-        })
-    }
-  }
-
   private ViewResult(won: any) {
     Swal.fire('El 8 es ganador')
   }
 
-  SaveHistory(): any {
-    Swal.fire('Guardado')
-  }
-  getRandomArbitrary() {
+  getRandomNumber() {
     return Math.floor(Math.random() * (10 - 1)) + 1;
   }
-  
+
 }
 

@@ -22,7 +22,7 @@ export class DataService {
     this.balls.push(Number(pBall));
     this.balls$.next(this.balls);
     console.log(pBall,'Bola agregada');
-    console.log(this.balls);
+    console.log('Bolas',this.balls);
   }
 
   getBalls$(): Observable<number[]>{
