@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { DataService } from '../data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { fromEvent} from 'rxjs';
 
 @Component({
   selector: 'bet-slip',
@@ -62,10 +64,20 @@ validationBoard(): any {
     console.log(this.amount);
     this.total = this.totalBallSelected * this.amount; */
   }
+  onClickSubmit(data: { valor: number; }){
+    if(data.valor<5){
+      Swal.fire('Apuesta mínima 5 Euros');
+    }else if(data.valor>this.AvailableCredit){
+      Swal.fire('No te alcanza el dinero');
+    }else{
+      this.total=data.valor*this.totalBallSelected
+      Swal.fire('Total apostar',String(this.total));
+    }
+  }
 
   validationValue(): any {
-    const newLocal = 'value';
-    if (+this.boardForm.get(newLocal).value < 5) {//if(Number(this.monto)<5){//
+    
+    if(Number(this.monto)<5){//if (+this.boardForm.get('value').value < 5) {//
       this.disableBet = false;
       this.boardForm.reset();
       Swal.fire('Apuesta mínima 5 Euros');

@@ -10,14 +10,15 @@
                     <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
                         <div class="p-3 mb-2 bg-primary bg-gradient fw-bold text-white">Available credit: € {{AvailableCredit | number : '1.2-2'}}
                         </div>
-                        <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="d-flex justify-content-center ms-5 me-5 align-items-center col g-3" >
-                            
+                        <form #okBet="ngForm" (ngSubmit)="onClickSubmit(okBet.value)" class="d-flex justify-content-center ms-5 me-5 align-items-center col g-3" >
+
                                 <label class="">{{totalBallSelected}}</label>
-                                <input type="text" class="form-control" currencyMask placeholder="Enter the value to bet" ngModel name="valor">
-                                <button type="submit" class="btn btn-primary " formControlName="buttonOk" (click)="validationValue()">Ok</button>
-                            
+                                <input type="text" name="valor" currencyMask placeholder="Enter the value to bet" ngModel>
+                                <input type="submit" value="Ok" id="button" class="btn btn-primary ms-5" (submit)="validationValue()">
+
                         </form>
                         <small id="emailHelp" class="form-text text-muted">Minimum bet 5 €.</small>
+                        
                     </div>
                 </div>
             </div>
@@ -26,7 +27,7 @@
 </div>
 
 <div class="d-flex justify-content-around aling-item-center">
-    <label>Total: {{monto*totalBallSelected}}</label>
+    <label >Total: € {{total}}</label>
 </div>
 
 <div class="d-grid gap-2">
