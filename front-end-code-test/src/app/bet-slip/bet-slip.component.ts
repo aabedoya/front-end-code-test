@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { NgModule } from '@angular/core';
-import { fromEvent} from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { DataService } from '../data.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'bet-slip',
@@ -12,32 +11,48 @@ import { FormsModule } from '@angular/forms';
 export class BetSlipComponent implements OnInit {
   public valueBet: number = 0;
   public amountBet: number = 10000;
-  public boardForm: any;
+  public betSlipForm: any;
   public disableBet: any;
-  public AvailableMoney: any;
+  public AvailableCredit: number=10000;
   public numero: number = 0;
   public selectedNumber: any[] = [];
   public viewCard = false;
   public stakeValue: any;
   public totalWon: any;
   public NumberWon: any;
-  public ballsSelected: any[] = [1,2,3,4];
-  public totalBallSelected: number = 0;
+  public ballsSelected: number[] = [];
+  public totalBallSelected: any = 0;
   public amount: number = 0;
   public total: number = 0;
   public monto: number=0;
+
   
-  constructor() { }
-  
+
+  constructor(private dataService: DataService) {
+  }
+
+
   ngOnInit(): void {
-     this.totalBallSelected = this.ballsSelected.length;
+    this.dataService.getBalls$().subscribe(balls=>{
+      this.ballsSelected = balls;
+      console.log('suscrito!')
+      this.totalBallSelected=this.ballsSelected.length;
+    });
+
     // const observable1 = fromEvent(button.addEventListener, 'click').subscribe(() =>
     //   console.log('You clicked the page!')
     // );
   }
+  validationBoard(): any {
+    this.betSlipForm = new FormGroup({
+      value: new FormControl('', [Validators.required])
+    });
+  }
+  onSubmit(){
 
+  }
   multiplicarapuesta(){
-    
+   
     /* console.log('Valor del input',document.getElementById('input-text'));
     this.amount = Number(document.getElementById('input-text'));
     console.log(this.amount);
@@ -45,13 +60,13 @@ export class BetSlipComponent implements OnInit {
   }
 
   validationValue(): any {
-    if (+this.boardForm.get('value').value < 5) {
+    if (+this.betSlipForm.get('value').value < 5) {
       this.disableBet = false;
       Swal.fire('Apuesta mínima 5 Euros');
-      this.boardForm.reset();
-    } else if (+this.boardForm.get('value').value >= this.AvailableMoney ) {
+      this.betSlipForm.reset();
+    } else if (+this.betSlipForm.get('value').value >= this.AvailableCredit ) {
       this.disableBet = false;
-      this.boardForm.reset();
+      this.betSlipForm.reset();
     } else {
       this.disableBet = true;
     }
@@ -63,7 +78,7 @@ export class BetSlipComponent implements OnInit {
     }
     else {
       this.viewCard = true;
-      this.stakeValue = this.boardForm.get('value').value;
+      this.stakeValue = this.betSlipForm.get('value').value;
       this.totalWon = (this.stakeValue * 1.5) / 100;
       var ramdon = this.getRandomArbitrary();
       console.log(ramdon);

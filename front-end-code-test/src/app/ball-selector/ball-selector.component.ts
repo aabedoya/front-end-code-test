@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'ball-selector',
@@ -8,15 +9,27 @@ import Swal from 'sweetalert2';
 })
 export class BallSelectorComponent implements OnInit {
   balls: any[] = [];
+  ballsClicked: any[]=[];
 
-
-  constructor() {}
-
-  ngOnInit(): void {
+  constructor(
+    private dataService: DataService
+  ) {
     this.balls=[1,2,3,4,5,6,7,8,9,10]
   }
+
+  ngOnInit(): void {
+    //this.balls=[1,2,3,4,5,6,7,8,9,10]
+  }
   bolaCliqueada(b:number){
-    Swal.fire('Hola clic');
+    this.ballsClicked.push(b);
+    console.log(b);
+    this.dataService.addBall(this.ballsClicked.values)
+    console.log(this.ballsClicked)
+  }
+
+  clearSelection(){
+    this.ballsClicked.length=0;
+    this.dataService.clear();
   }
 
 }

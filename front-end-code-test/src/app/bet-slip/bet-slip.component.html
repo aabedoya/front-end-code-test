@@ -1,15 +1,16 @@
 
-
 <div class="contenedor">
+<label>Available credit: € {{AvailableCredit | number : '1.2-2'}}</label>
     <div>
         <button type="button" class="container-balls-selected__ball container-balls-selected__ball__{{ballSelected}} mb-5" *ngFor="let ballSelected of ballsSelected">{{ballSelected}} </button>
     </div>
+   
     <div class="calculate-amount">
-        <label class="border-primary me-3">{{totalBallSelected}}</label>
-        <input type="text" [(ngModel)]="monto">
-        <button id="button" type="submit" class="btn btn-primary ms-3" (click)="multiplicarapuesta()">
-        
-            Ok</button>
+        <form method="get" [formGroup]="betSlipForm">
+            <label class="me-3">{{totalBallSelected}}</label>
+            <input type="text" class="form-control" placeholder="Enter the value to bet" formControlName="value" (blur)="validationValue()">
+            <button type="submit" class="btn btn-primary ms-3" (click)="validationValue()" [disabled]="!disableBet">Ok</button>
+        </form>
     </div>
 </div>
 
@@ -18,5 +19,5 @@
 </div>
 
 <div class="d-grid gap-2">
-    <button type="button" class="btn btn-primary btn-lg btn-block ms-2 mt-2">Place Bet</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block ms-2 mt-2">Place Bet</button>
 </div>
