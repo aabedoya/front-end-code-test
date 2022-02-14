@@ -5,18 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { BallSelectorComponent } from "./ball-selector/ball-selector.component";
 import { BetSlipComponent } from './bet-slip/bet-slip.component';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "right",
   allowNegative: true,
-  decimal: ",",
+  decimal: ".",
   precision: 2,
   prefix: "€ ",
   suffix: "",
-  thousands: "."
+  thousands: ","
 };
 @NgModule({
   declarations: [
@@ -29,8 +27,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CurrencyMaskModule,
-    BrowserAnimationsModule
+    CurrencyMaskModule
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }

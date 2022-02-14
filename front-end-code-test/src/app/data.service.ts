@@ -10,8 +10,8 @@ export class ballsSelected{
 })
 export class DataService {
 
-  private balls: any[];
-  private balls$: Subject<any[]>;
+  private balls: number[];
+  private balls$: Subject<number[]>;
 
   constructor() {
     this.balls=[];
@@ -21,7 +21,7 @@ export class DataService {
   addBall(pBall:any){
     this.balls.push(Number(pBall));
     this.balls$.next(this.balls);
-    console.log('Bola agregada');
+    console.log(pBall,'Bola agregada');
     console.log(this.balls);
   }
 
