@@ -67,7 +67,7 @@ validationBoard(): any {
   onClickSubmit(data: { valor: number; }){
     if(data.valor<5){
       Swal.fire('Apuesta mínima 5 Euros');
-    }else if(data.valor>this.AvailableCredit){
+    }else if(data.valor*this.totalBallSelected>this.AvailableCredit){
       Swal.fire('No te alcanza el dinero');
     }else{
       this.total=data.valor*this.totalBallSelected
@@ -75,21 +75,20 @@ validationBoard(): any {
     }
   }
 
-  validationValue(): any {
-    
-    if(Number(this.monto)<5){//if (+this.boardForm.get('value').value < 5) {//
-      this.disableBet = false;
-      this.boardForm.reset();
-      Swal.fire('Apuesta mínima 5 Euros');
-    } else if (+this.boardForm.get('value').value >= this.AvailableCredit ) {
-      this.disableBet = false;
-      this.boardForm.reset();
-      Swal.fire('No te alcanza el dinero');
-    } else {
-      this.disableBet = true;
-      Swal.fire('Apuesta no mas');
-    }
-  }
+  // validationValue(): any {
+  //   if(Number(this.monto)<5){//if (+this.boardForm.get('value').value < 5) {//
+  //     this.disableBet = false;
+  //     this.boardForm.reset();
+  //     Swal.fire('Apuesta mínima 5 Euros');
+  //   } else if (+this.boardForm.get('value').value >= this.AvailableCredit ) {
+  //     this.disableBet = false;
+  //     this.boardForm.reset();
+  //     Swal.fire('No te alcanza el dinero');
+  //   } else {
+  //     this.disableBet = true;
+  //     Swal.fire('Apuesta no mas');
+  //   }
+  // }
 
   GenerateBet(): any {
     if (this.selectedNumber.length <= 0) {
