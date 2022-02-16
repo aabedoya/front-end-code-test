@@ -80,7 +80,16 @@ validationBoard(): any {
       this.dataService.clear()
       this.total=0;
       this.ballsSelected.length=0;
-      Swal.fire('Numero ganador es el: ',String(numberWin));
+      
+        Swal.fire({
+        title: '¡ Win Number is '+numberWin,
+        text: 'Verify your tickets, please.',
+        imageUrl: 'https://i.ibb.co/mX5ntFy/WinBall.gif',
+        imageWidth: 400,
+        imageHeight: 400,
+        imageAlt: 'Custom image',
+      })
+      //Swal.fire('Numero ganador es el: ',String(numberWin));
     }
   }
 

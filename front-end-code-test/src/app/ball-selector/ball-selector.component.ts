@@ -22,8 +22,9 @@ export class BallSelectorComponent implements OnInit {
   }
   bolaCliqueada(b:number){
     this.ballsClicked.push(b);
-    console.log('parametro',b);
-    this.dataService.addBall(this.ballsClicked.values)
+    console.log('bola agregada',b);
+    this.dataService.addBall(b)
+    //this.dataService.addBall(this.ballsClicked.values)
     console.log(this.ballsClicked)
   }
 
