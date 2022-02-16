@@ -34,6 +34,7 @@ export class BetSlipComponent implements OnInit {
 
   ballsSelected!: number[];
   lugar!: { valor: any; };
+  public isWinner = false;
 
   constructor(private dataService: DataService) {
   }
@@ -45,6 +46,7 @@ export class BetSlipComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    this.isWinner = false;
       this.dataService.getBalls$().subscribe(balls=>{
         this.ballsSelected = balls;
         this.totalBallSelected=this.ballsSelected.length;
@@ -75,40 +77,46 @@ validationBoard(): any {
     }else if(this.total<5){
       Swal.fire('Apuesta mínima 5 Euros');
     }else{
-      this.AvailableCredit-=this.total
+      this.AvailableCredit-=this.total;
       const numberWin=this.getRandomNumber();
-      this.dataService.clear()
-      this.total=0;
-      this.ballsSelected.length=0;
-      
+      this.ballsSelected.forEach(element => {
+        console.log(numberWin)
+        console.log(element)
+        if(element===numberWin){
+          this.AvailableCredit+=this.total/this.totalBallSelected*1.5
+          this.isWinner=true;
+          Swal.fire({
+            title: '¡ Win Number is '+numberWin,
+            text: 'You are a WINNER, congratulations.',
+            imageUrl: 'https://i.ibb.co/mX5ntFy/WinBall.gif',
+            imageWidth: 400,
+            imageHeight: 400,
+            imageAlt: 'Custom image',
+          })
+          this.dataService.clear();
+          this.total=0;;
+          this.ballsSelected.length=0;
+        }
+      });
+      if(this.isWinner==false){
+        this.isWinner=false
         Swal.fire({
-        title: '¡ Win Number is '+numberWin,
-        text: 'Verify your tickets, please.',
-        imageUrl: 'https://i.ibb.co/mX5ntFy/WinBall.gif',
-        imageWidth: 400,
-        imageHeight: 400,
-        imageAlt: 'Custom image',
-      })
-      //Swal.fire('Numero ganador es el: ',String(numberWin));
+          title: '¡ Win Number is '+numberWin,
+          text: 'You are not a winner. keep trying.',
+          imageUrl: 'https://i.ibb.co/mX5ntFy/WinBall.gif',
+          imageWidth: 400,
+          imageHeight: 400,
+          imageAlt: 'Custom image',
+        })
+        this.dataService.clear();
+        this.total=0;;
+        this.ballsSelected.length=0;
+      }
     }
   }
 
-  // validationValue(): any {
-  //   if(Number(this.monto)<5){//if (+this.boardForm.get('value').value < 5) {//
-  //     this.disableBet = false;
-  //     this.boardForm.reset();
-  //     Swal.fire('Apuesta mínima 5 Euros');
-  //   } else if (+this.boardForm.get('value').value >= this.AvailableCredit ) {
-  //     this.disableBet = false;
-  //     this.boardForm.reset();
-  //     Swal.fire('No te alcanza el dinero');
-  //   } else {
-  //     this.disableBet = true;
-  //     Swal.fire('Apuesta no mas');
-  //   }
-  // }
 
-  private ViewResult(won: any) {
+  private ViewResult(won: any): void {
     Swal.fire('El 8 es ganador')
   }
 
