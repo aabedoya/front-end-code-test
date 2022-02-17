@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DataService } from '../data.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { fromEvent} from 'rxjs';
+
 
 @Component({
   selector: 'bet-slip',
@@ -79,11 +77,11 @@ export class BetSlipComponent implements OnInit {
           this.isWinner=true;
           Swal.fire({
             title: '¡ Win Number is '+numberWin,
-            text: 'You are a WINNER, has won € ' + this.forPayMessage + ' euros.',
+            text: 'You are a WINNER, has won € ' + this.forPayMessage,
             imageUrl: 'https://i.ibb.co/mX5ntFy/WinBall.gif',
             imageWidth: 400,
             imageHeight: 400,
-            imageAlt: 'Custom image',
+            imageAlt: 'You win image',
           });
           this.dataService.clear();
           this.total=0;
