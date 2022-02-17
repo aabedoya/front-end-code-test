@@ -7,13 +7,13 @@ import { NgForm } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { fromEvent} from 'rxjs';
 
-
 @Component({
   selector: 'bet-slip',
   templateUrl: './bet-slip.component.html',
   styleUrls: ['./bet-slip.component.scss'],
-  //providers: [DataService]
+  providers: []
 })
+
 export class BetSlipComponent implements OnInit {
 
   public boardForm: any;
@@ -21,7 +21,7 @@ export class BetSlipComponent implements OnInit {
   public selectedNumber: any[] = [];
   public totalBallSelected: number = 0;
   public total: number = 0;
-  public lugar!: { valor: any; };
+  public formValue!: { betValue: any; };
   public isWinner = false;
   public forPayMessage: number=0;
   ballsSelected!: number[];
@@ -29,39 +29,38 @@ export class BetSlipComponent implements OnInit {
   constructor(private dataService: DataService) {
   }
   onSubmit(form: NgForm){
-    const {valor} = form.value;
-    this.lugar = {
-      valor
+    const {betValue} = form.value;
+    this.formValue = {
+      betValue
     }
-}
+  }
 
   ngOnInit(): void {
     this.isWinner = false;
-      this.dataService.getBalls$().subscribe(balls=>{
-        this.ballsSelected = balls;
-        this.totalBallSelected=this.ballsSelected.length;
-        console.log('bolas seleccionadas',this.totalBallSelected);
-  });
-}
+    this.dataService.getBalls$().subscribe(balls=>{
+      this.ballsSelected = balls;
+      this.totalBallSelected=this.ballsSelected.length;
+    });
+  }
 
-validationBoard(): any {
-  this.boardForm = new FormGroup({
-    value: new FormControl('', [Validators.required])
-  });
-}
+  validationBoard(): any {
+    this.boardForm = new FormGroup({
+      value: new FormControl('', [Validators.required])
+    });
+  }
 
-  onClickSubmit(data: { valor: number; }){
-    if(data.valor<5){
+  onClickSubmit(data: { betValue: number; }){
+    if(data.betValue<5){
       Swal.fire('Minimum bet 5 Euros');
-    }else if(data.valor*this.totalBallSelected>this.AvailableCredit){
+    }else if(data.betValue*this.totalBallSelected>this.AvailableCredit){
       Swal.fire('Insufficient credit to bet');
     }else{
       if(this.totalBallSelected===0){
         Swal.fire('Select at least one ballot');
       }else{
-        this.total=data.valor*this.totalBallSelected
-        Swal.fire('Total bet € ',String(this.total));
-    }
+        this.total=data.betValue*this.totalBallSelected;
+        Swal.fire('€ '+this.total+' To bet');
+      }
     }
   }
 
@@ -74,8 +73,6 @@ validationBoard(): any {
       this.AvailableCredit-=this.total;
       const numberWin=this.getRandomNumber();
       this.ballsSelected.forEach(element => {
-        console.log(numberWin)
-        console.log(element)
         if(element===numberWin){
           this.AvailableCredit+=((this.total/this.totalBallSelected)*1.5);
           this.forPayMessage=((this.total/this.totalBallSelected)*1.5);
@@ -87,24 +84,22 @@ validationBoard(): any {
             imageWidth: 400,
             imageHeight: 400,
             imageAlt: 'Custom image',
-          })
+          });
           this.dataService.clear();
-          this.total=0;;
+          this.total=0;
           this.ballsSelected.length=0;
-          
         }
       });
       if(this.isWinner==false){
-        this.isWinner=false
+        this.isWinner=false;
         Swal.fire({
           title: '¡ Win Number is '+numberWin,
           text: 'You are not a winner. keep trying.',
           imageUrl: 'https://i.ibb.co/M95h9k3/YouLose.gif',
           imageWidth: 640,
           imageHeight: 360,
-          imageAlt: 'Custom image',
+          imageAlt: 'You lose image',
         })
-        
         this.dataService.clear();
         this.total=0;;
         this.ballsSelected.length=0;
@@ -115,6 +110,5 @@ validationBoard(): any {
   getRandomNumber() {
     return Math.floor(Math.random() * (10 - 1)) + 1;
   }
-
 }
 

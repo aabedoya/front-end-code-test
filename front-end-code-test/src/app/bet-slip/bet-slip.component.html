@@ -1,24 +1,24 @@
 
 <div class="contenedor shadow-lg p-3 mb-5 bg-body rounded">
     <div>
-        <button type="button" class="container-balls-selected__ball container-balls-selected__ball__{{ballSelected}} mb-5" *ngFor="let ballSelected of ballsSelected">{{ballSelected}} </button>
+        <button type="button" class="container-balls-selected__ball container-balls-selected__ball__{{ballSelected}}
+        mb-5" *ngFor="let ballSelected of ballsSelected">{{ballSelected}} </button>
     </div>
     <div class="calculate-amount">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
-                        <div class="p-3 mb-2 bg-primary bg-gradient fw-bold text-white">Available credit: € {{AvailableCredit | number : '1.2-2'}}
+                        <div class="p-3 mb-2 bg-primary bg-gradient fw-bold text-white">
+                            Available credit: € {{AvailableCredit | number : '1.2-2'}}
                         </div>
-                        <form #okBet="ngForm" (ngSubmit)="onClickSubmit(okBet.value)" class="d-flex justify-content-center ms-5 me-5 align-items-center col g-3" >
-
-                                <label class="me-3">{{totalBallSelected}}X</label>
-                                <input type="text" name="valor" currencyMask placeholder="Enter the value to bet" ngModel>
-                                <input type="submit" value="Ok" id="button" class="btn btn-primary ms-5">
-
+                        <form #okBet="ngForm" (ngSubmit)="onClickSubmit(okBet.value)"
+                            class="d-flex justify-content-center ms-5 me-5 align-items-center col g-3" >
+                            <label class="me-3">{{totalBallSelected}}X</label>
+                            <input type="text" name="betValue" currencyMask placeholder="Enter the value to bet" ngModel>
+                            <input type="submit" value="Ok" id="button" class="btn btn-primary ms-5">
                         </form>
                         <small id="emailHelp" class="form-text text-muted">Minimum bet 5 €.</small>
-                        
                     </div>
                 </div>
             </div>
@@ -31,6 +31,7 @@
 </div>
 
 <div class="d-grid gap-2">
-        <input type="submit" value="Place Bet" class="btn btn-primary btn-lg btn-block ms-2 mt-2" (click)="onClickPlaceBet()">
+    <input type="submit" value="Place Bet" class="btn btn-primary btn-lg btn-block ms-2 mt-2"
+    (click)="onClickPlaceBet()">
 </div>
 
