@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { DataService } from '../data.service';
 
+
 @Component({
   selector: 'ball-selector',
   templateUrl: './ball-selector.component.html',
