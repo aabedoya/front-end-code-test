@@ -1,103 +1,120 @@
 import { Component, OnInit } from '@angular/core';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { DataService } from '../data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { fromEvent} from 'rxjs';
-import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'bet-slip',
   templateUrl: './bet-slip.component.html',
-  styleUrls: ['./bet-slip.component.scss']
+  styleUrls: ['./bet-slip.component.scss'],
+  //providers: [DataService]
 })
 export class BetSlipComponent implements OnInit {
-  public valueBet: number = 0;
-  public amountBet: number = 10000;
+
   public boardForm: any;
-  public disableBet: any;
-  public AvailableMoney: any;
-  public numero: number = 0;
+  public AvailableCredit: number = 10000;
   public selectedNumber: any[] = [];
-  public viewCard = false;
-  public stakeValue: any;
-  public totalWon: any;
-  public NumberWon: any;
-  public ballsSelected: any[] = [1,2,3,4];
   public totalBallSelected: number = 0;
-  public amount: number = 0;
   public total: number = 0;
-  public monto: number=0;
-  
-  constructor() { }
-  
+  public lugar!: { valor: any; };
+  public isWinner = false;
+  public forPayMessage: number=0;
+  ballsSelected!: number[];
+
+  constructor(private dataService: DataService) {
+  }
+  onSubmit(form: NgForm){
+    const {valor} = form.value;
+    this.lugar = {
+      valor
+    }
+}
+
   ngOnInit(): void {
-     this.totalBallSelected = this.ballsSelected.length;
-    // const observable1 = fromEvent(button.addEventListener, 'click').subscribe(() =>
-    //   console.log('You clicked the page!')
-    // );
-  }
+    this.isWinner = false;
+      this.dataService.getBalls$().subscribe(balls=>{
+        this.ballsSelected = balls;
+        this.totalBallSelected=this.ballsSelected.length;
+        console.log('bolas seleccionadas',this.totalBallSelected);
+  });
+}
 
-  multiplicarapuesta(){
-    
-    /* console.log('Valor del input',document.getElementById('input-text'));
-    this.amount = Number(document.getElementById('input-text'));
-    console.log(this.amount);
-    this.total = this.totalBallSelected * this.amount; */
-  }
+validationBoard(): any {
+  this.boardForm = new FormGroup({
+    value: new FormControl('', [Validators.required])
+  });
+}
 
-  validationValue(): any {
-    if (+this.boardForm.get('value').value < 5) {
-      this.disableBet = false;
-      Swal.fire('Apuesta mínima 5 Euros');
-      this.boardForm.reset();
-    } else if (+this.boardForm.get('value').value >= this.AvailableMoney ) {
-      this.disableBet = false;
-      this.boardForm.reset();
-    } else {
-      this.disableBet = true;
+  onClickSubmit(data: { valor: number; }){
+    if(data.valor<5){
+      Swal.fire('Minimum bet 5 Euros');
+    }else if(data.valor*this.totalBallSelected>this.AvailableCredit){
+      Swal.fire('Insufficient credit to bet');
+    }else{
+      if(this.totalBallSelected===0){
+        Swal.fire('Select at least one ballot');
+      }else{
+        this.total=data.valor*this.totalBallSelected
+        Swal.fire('Total bet € ',String(this.total));
+    }
     }
   }
 
-  GenerateBet(): any {
-    if (this.selectedNumber.length <= 0) {
-      Swal.fire('Seleccione al menos 1 balota');
-    }
-    else {
-      this.viewCard = true;
-      this.stakeValue = this.boardForm.get('value').value;
-      this.totalWon = (this.stakeValue * 1.5) / 100;
-      var ramdon = this.getRandomArbitrary();
-      console.log(ramdon);
-      this.NumberWon = ramdon;
-
+  onClickPlaceBet(){
+    if(this.totalBallSelected<1){
+      Swal.fire('Select at least one ballot');
+    }else if(this.total<5){
+      Swal.fire('Minimum bet 5 Euros');
+    }else{
+      this.AvailableCredit-=this.total;
+      const numberWin=this.getRandomNumber();
+      this.ballsSelected.forEach(element => {
+        console.log(numberWin)
+        console.log(element)
+        if(element===numberWin){
+          this.AvailableCredit+=((this.total/this.totalBallSelected)*1.5);
+          this.forPayMessage=((this.total/this.totalBallSelected)*1.5);
+          this.isWinner=true;
+          Swal.fire({
+            title: '¡ Win Number is '+numberWin,
+            text: 'You are a WINNER, has won € ' + this.forPayMessage + ' euros.',
+            imageUrl: 'https://i.ibb.co/mX5ntFy/WinBall.gif',
+            imageWidth: 400,
+            imageHeight: 400,
+            imageAlt: 'Custom image',
+          })
+          this.dataService.clear();
+          this.total=0;;
+          this.ballsSelected.length=0;
+          
+        }
+      });
+      if(this.isWinner==false){
+        this.isWinner=false
         Swal.fire({
-        title: 'Generating result',
-        html: '¡The winning number is <b></b> !',
-        timerProgressBar: true,
-        showDenyButton: false,
-        confirmButtonText: 'Ok',
-            didOpen: () => {
-                Swal.showLoading();
-                setInterval(() => {
-                    this.ViewResult(this.NumberWon)
-                  }, 3000)
-            },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.SaveHistory();
-          }
+          title: '¡ Win Number is '+numberWin,
+          text: 'You are not a winner. keep trying.',
+          imageUrl: 'https://i.ibb.co/M95h9k3/YouLose.gif',
+          imageWidth: 640,
+          imageHeight: 360,
+          imageAlt: 'Custom image',
         })
+        
+        this.dataService.clear();
+        this.total=0;;
+        this.ballsSelected.length=0;
+      }
     }
   }
 
-  private ViewResult(won: any) {
-    Swal.fire('El 8 es ganador')
-  }
-
-  SaveHistory(): any {
-    Swal.fire('Guardado')
-  }
-  getRandomArbitrary() {
+  getRandomNumber() {
     return Math.floor(Math.random() * (10 - 1)) + 1;
   }
 
 }
+
