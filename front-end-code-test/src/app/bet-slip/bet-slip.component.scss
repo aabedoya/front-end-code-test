@@ -1,10 +1,10 @@
-.calculate-amount{
+.ccalculate-amount{
     display: flex;
     justify-content: center;    
     align-items: center;
     padding-top: 100px;
 }
-.contenedor{
+.ccontenedor{
 
     background-color: white;
     border: 1px dashed transparent;
@@ -14,12 +14,11 @@
     padding: 5px;
 }
 .container-balls-selected{
-        background-color: white;
         border: 1px dashed red;
-        height: 100%;
-        padding-top: 100px;
+        height: 400px;
         border: 1px dashed blue;
         border-radius: 5px;
+        background-color: #000000;
         &__ball {
             color: white;
             border-radius: 50%;
