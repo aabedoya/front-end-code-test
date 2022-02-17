@@ -1,7 +1,10 @@
+
+
 <div class="container-left bg-white">
     <label>Numbers</label><br>
     <div class="container-balls d-flex justify-content-around aling-item-center">
-        <button type="button" class="container-balls__ball container-balls__ball__{{item}}" *ngFor="let item of balls" (click)="bolaCliqueada(item)">{{item}} </button>
+        <button type="button" class="container-balls__ball container-balls__ball__{{item}}"
+        *ngFor="let item of balls" (click)="bolaCliqueada(item)">{{item}} </button>
     </div>
     <div class="d-flex justify-content-around aling-item-center">
         <button type="button" class="button-light" (click)="clearSelection()">Clear Selection</button>
