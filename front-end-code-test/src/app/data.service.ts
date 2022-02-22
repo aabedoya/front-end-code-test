@@ -28,7 +28,7 @@ export class DataService {
   }
 
   clear(){
-    this.balls.length=0;
+    this.balls$.next([]);
     this.balls$.unsubscribe;
   }
 }
