@@ -14,7 +14,7 @@
                         </div>
                         <form #okBet="ngForm" (ngSubmit)="onClickSubmit(okBet.value)"
                             class="d-flex justify-content-center ms-5 me-5 align-items-center col g-3" >
-                            <label class="me-3">{{totalBallSelected}}X</label>
+                            <label class="me-3">{{totalBallSelected}} X</label>
                             <input type="text" name="betValue" currencyMask placeholder="Enter the value to bet" ngModel>
                             <input type="submit" value="Ok" id="button" class="btn btn-primary ms-5">
                         </form>

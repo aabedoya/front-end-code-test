@@ -72,8 +72,9 @@ export class BetSlipComponent implements OnInit {
       const numberWin=this.getRandomNumber();
       this.ballsSelected.forEach(element => {
         if(element===numberWin){
-          this.AvailableCredit+=((this.total/this.totalBallSelected)*1.5);
-          this.forPayMessage=((this.total/this.totalBallSelected)*1.5);
+          const operation = ((this.total/this.totalBallSelected)*1.5)
+          this.AvailableCredit += operation;
+          this.forPayMessage = operation;
           this.isWinner=true;
           Swal.fire({
             title: '¡ Win Number is '+numberWin,
@@ -107,6 +108,9 @@ export class BetSlipComponent implements OnInit {
 
   getRandomNumber() {
     return Math.floor(Math.random() * (10 - 1)) + 1;
+  }
+
+  ngOnDestroy() {
   }
 }
 
